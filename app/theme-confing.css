@@ -1,0 +1,7 @@
+.radix-themes {
+    --default-font-family: var(--font-poppins) !important;
+    --heading-font-family: var(--font-poppins) !important;
+    /* --default-font-family: 'Popins', sans-serif;
+    --heading-font-family: 'Montserrat', sans-serif; */
+}
+  

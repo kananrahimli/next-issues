@@ -1,8 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
+import { Theme, ThemePanel } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
+import "./theme-confing.css";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import Navbar from "./components/Navbar";
+import App from "./_app";
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+const poppins = Poppins({
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  display: "swap",
+  weight: "500",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +29,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html>
+      <body className={poppins.variable}>
+        <App>
+          <Theme accentColor="cyan" radius="large">
+          <Navbar></Navbar>
+          <main>{children}</main>
+          {/* <ThemePanel /> */}
+          </Theme>
+        </App>
+      </body>
     </html>
   );
 }
