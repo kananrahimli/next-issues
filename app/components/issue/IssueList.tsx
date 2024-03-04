@@ -5,12 +5,13 @@ import IssueItem from "../../components/issue/IssueItem";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../store/store";
-import { getAllIssues } from "../../store/slices/issueSlice";
 import { CardsSkeleton } from "../../components/skeleton/CardSkeleton";
-import { Issue } from "@prisma/client";
+import { Issue } from '../../store/slices/issueSlice';
+import { getAllIssues } from '../../actions/data';
 
 
-const IssueList =  () => {
+const IssueList =  async () => {
+  const issues= await getAllIssues('/issues/all')
 //     const { issues } = useSelector((state: RootState) => state.issue);
 //   const dispatch = useDispatch<AppDispatch>();
 //   console.log(issues);
@@ -23,20 +24,20 @@ const IssueList =  () => {
     <div>
       <Grid
         className="flex-1"
-        columns={{ initial: "2", md: "3", lg: "4", xl: "6" }}
-        gapY="9"
+        columns={{ xs:"1", sm:'2', md: "3", lg: "4", xl: "6" }}
+        gapY="5"
         gapX="3"
         width="auto"
       >
-        {/* {issues.map((issue,key) => {
+        {issues?.data.map((issue:Issue,key:any) => {
           return (
-            <Box height="9" key={issue.id}>
+            <Box key={issue.id}>
               <Link href="#">
                 <IssueItem issue={issue}></IssueItem>
               </Link>
             </Box>
           );
-        })} */}
+        })}
       </Grid>
     </div>
   );
